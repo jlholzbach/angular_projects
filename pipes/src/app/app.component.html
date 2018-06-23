@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-xs-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+      <input type="text" [(ngModel)]="filteredStatus">
+      <br /><br>
+      <h2>App Status: {{ appStatus | async }}</h2>
+      <br><br>
+      <ul class="list-group">
+        <!--filter:filteredStatus:'status'-->
+        <li class="list-group-item" *ngFor="let server of servers | sort" [ngClass]="getStatusClasses(server)">
+          <label class="badge badge-secondary badge-pill" style='float: right; padding: .45em .6em;'>
+            {{ server.status | reverse}}
+          </label>
+          <!--<span class="badge badge-secondary" style='border-radius: 15px; padding: .45em .6em; float: right;'>
+            {{ server.status }}
+          </span>-->
+          <strong>{{ server.name | shorten:15 }}</strong> | {{ server.instanceType | uppercase }} | {{ server.started | date:'fullDate'}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
